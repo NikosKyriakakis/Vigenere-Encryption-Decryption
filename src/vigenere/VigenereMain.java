@@ -16,11 +16,11 @@ public class VigenereMain {
             System.exit(1);
         }
 
-        String key = args[2].toUpperCase();
-        String mode = args[3];
-        IFileIO handlerIO = new FileIO(args[0], args[1]);
-        Vigenere vigenere = new Vigenere(key);
         IFunction fn = null;
+        IFileIO handlerIO = new FileIO(args[0], args[1]);
+        String key = args[2].toUpperCase();
+        Vigenere vigenere = new Vigenere(key);
+        String mode = args[3];
 
         switch(mode) {
             case "encrypt":
@@ -39,7 +39,7 @@ public class VigenereMain {
             String cipherText;
 
             while((plainText = handlerIO.loadLine()) != null) {
-                cipherText = fn.invoke(vigenere, plainText, key);
+                cipherText = fn.invoke(vigenere, plainText);
                 handlerIO.saveLine(cipherText);
             }
             handlerIO.closeInputFile();
@@ -50,15 +50,15 @@ public class VigenereMain {
         }
     }
 
-    private static String executeEncryption(Vigenere vigenere, String text, String key) {
+    private static String executeEncryption(Vigenere vigenere, String text) {
         return vigenere.encrypt(text);
     }
     
-    private static String executeDecryption(Vigenere vigenere, String text, String key) {
+    private static String executeDecryption(Vigenere vigenere, String text) {
         return vigenere.decrypt(text);
     }
     
     private interface IFunction {
-        String invoke(Vigenere vigenere, String text, String key);
+        String invoke(Vigenere vigenere, String text);
     }
 }
