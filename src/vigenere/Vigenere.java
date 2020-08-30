@@ -7,17 +7,20 @@ public class Vigenere {
     private final static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private final static int alphabetSize = alphabet.length();
     private final List<Character> bufferList;
+    private final String key;
+    private final int keySize;
+    private char keyLetter;
     private char encryptedLetter;
     private char plainLetter;
-    private char keyLetter;
 
-    public Vigenere() {
+    public Vigenere(String key) {
         bufferList = new ArrayList<>();
+        this.key = key;
+        this.keySize = this.key.length();
     }
 
-    public String encrypt(String text, String key) {
+    public String encrypt(String text) {
         final int textSize = text.length();
-        final int keySize = key.length();
         int encryptedIndex;
 
         bufferList.clear();
@@ -39,9 +42,8 @@ public class Vigenere {
         return unifiedString();
     }
 
-    public String decrypt(String text, String key) {
+    public String decrypt(String text) {
         final int textSize = text.length();
-        final int keySize = key.length();
         int plainIndex;
 
         bufferList.clear();

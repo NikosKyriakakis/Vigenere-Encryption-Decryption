@@ -19,7 +19,7 @@ public class VigenereMain {
         String key = args[2].toUpperCase();
         String mode = args[3];
         IFileIO handlerIO = new FileIO(args[0], args[1]);
-        Vigenere vigenere = new Vigenere();
+        Vigenere vigenere = new Vigenere(key);
         IFunction fn = null;
 
         switch(mode) {
@@ -51,11 +51,11 @@ public class VigenereMain {
     }
 
     private static String executeEncryption(Vigenere vigenere, String text, String key) {
-        return vigenere.encrypt(text, key);
+        return vigenere.encrypt(text);
     }
     
     private static String executeDecryption(Vigenere vigenere, String text, String key) {
-        return vigenere.decrypt(text, key);
+        return vigenere.decrypt(text);
     }
     
     private interface IFunction {
